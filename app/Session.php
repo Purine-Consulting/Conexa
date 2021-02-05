@@ -20,11 +20,11 @@ class Session extends Model implements AuthenticatableContract, AuthorizableCont
     protected $table = 'session';
 
     /**
-     * Avoir les paiements d'une facture
+     * Avoir les activités d'une session
      */
-    public function payments()
+    public function activities()
     {
-        return $this->hasMany('\App\Payment', 'invoice');
+        return $this->hasMany('\App\Activity', 'session');
     }
 
     /**
