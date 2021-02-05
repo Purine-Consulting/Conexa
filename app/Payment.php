@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class Invoice extends Model implements AuthenticatableContract, AuthorizableContract
+class Payment extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -17,22 +17,14 @@ class Invoice extends Model implements AuthenticatableContract, AuthorizableCont
      *
      * @var string
      */
-    protected $table = 'invoice';
-
-    /**
-     * Avoir les paiements d'une facture
-     */
-    public function payments()
-    {
-        return $this->hasMany('\App\Payment', 'invoice');
-    }
+    protected $table = 'payment';
 
     /**
      * Avoir le mentor d'une facture
      */
-    public function mentees()
+    public function invoices()
     {
-        return $this->belongsTo('\App\Mentee', 'mentee');
+        return $this->belongsTo('\App\Invoice', 'invoice');
     }
 
     /**
@@ -41,6 +33,6 @@ class Invoice extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array
      */
     protected $fillable = [
-        'lib', 'amount', 'mentee'
+        'ref', 'date', 'invoice'
     ];
 }
