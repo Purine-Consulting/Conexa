@@ -14,3 +14,15 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function() use ($router) {
+    // Authentication management
+    $router->group(['prefix' => 'auth'], function() use ($router) {
+        $router->post('login', 'AuthController@login');
+        $router->post('register', 'AuthController@register');
+    });
+    // User management endpoints
+    $router->group(['prefix' => 'users'], function() use ($router) {
+
+    });
+});
