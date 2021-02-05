@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class Mentee extends Model implements AuthenticatableContract, AuthorizableContract
+class Invoice extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -17,13 +17,22 @@ class Mentee extends Model implements AuthenticatableContract, AuthorizableContr
      *
      * @var string
      */
-    protected $table = 'mentee';
+    protected $table = 'invoice';
 
     /**
-     * Avoir les factures d'un mentoré
+     * Avoir le mentor d'une facture
      */
-    public function invoices()
+    public function mentees()
     {
-        return $this->hasMany('\App\Invoice', 'mentee');
+        return $this->belongsTo('\App\Mentee', 'mentee');
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'lib', 'amount', 'mentee'
+    ];
 }
