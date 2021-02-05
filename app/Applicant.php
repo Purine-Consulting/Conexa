@@ -20,11 +20,7 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
     protected $table = 'applicant';
 
     /**
-<<<<<<< HEAD
      * Avoir le grade d'un applicant
-=======
-     * Avoir les applicants ayant un certain niveau
->>>>>>> be5a0c9d0e966558575712f270e325a0e4342172
      */
     public function grade()
     {
