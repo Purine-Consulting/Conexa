@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use App\Applicant;
 
 class AuthController extends Controller
 {
@@ -38,8 +39,12 @@ class AuthController extends Controller
             $user->gender = $request->input('gender');
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
-
             $user->save();
+
+            $applicant = new Applicant;
+            $applicant->id = $user->id;
+            $applicant->grade = $request->input('grade');
+            $applicant->save();
 
             return response()->json(['user' => $user, 'message' => 'Utilisateur créé avec succès'], 201);
         } catch (\Exception $e) {
