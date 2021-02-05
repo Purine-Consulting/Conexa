@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -13,7 +15,36 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validate($request, [
+            'firstname' => 'required|string',
+            'lastname'  => 'required|string',
+            'email'     => 'required|email|unique:user',
+            'password'  => 'required|confirmed',
+        ]);
+
+        try {
+            $user = new User;
+            $user->firstname = $request->input('firstname');
+            $user->lastname = $request->input('lastname');
+            $user->email = $request->input('email');
+            $user->phone = $request->input('phone');
+            $user->address = $request->input('address');
+            $user->enterprise = $request->input('enterprise');
+            $user->gender = $request->input('gender');
+            $plainPassword = $request->input('password');
+            $user->password = app('hash')->make($plainPassword);
+
+            $user->save();
+
+            return response()->json(['user' => $user, 'message' => 'Utilisateur créé avec succès'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Utilisateur non créé', 'erreur' => $e], 409);
+        }
     }
 
     /**
