@@ -61,8 +61,9 @@ $app->singleton(
 
 $app->configure('app');
 
-//Ajout de la configuration de JWTAuth
+//Ajout de la configuration pour JWTAuth
 $app->configure('jwt');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
