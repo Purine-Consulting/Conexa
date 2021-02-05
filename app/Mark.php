@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class Session extends Model implements AuthenticatableContract, AuthorizableContract
+class Mark extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -17,26 +17,10 @@ class Session extends Model implements AuthenticatableContract, AuthorizableCont
      *
      * @var string
      */
-    protected $table = 'session';
+    protected $table = 'mark';
 
     /**
-     * Avoir les activités d'une session
-     */
-    public function activities()
-    {
-        return $this->hasMany('\App\Activity', 'session');
-    }
-
-    /**
-     * Avoir le mentor d'une session
-     */
-    public function mentee()
-    {
-        return $this->belongsTo('\App\Mentee', 'mentee');
-    }
-
-    /**
-     * Avoir le mentor d'une session
+     * Avoir le mentor d'une note
      */
     public function mentor()
     {
@@ -49,6 +33,6 @@ class Session extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array
      */
     protected $fillable = [
-        'date', 'mentor', 'mentee'
+        'value', 'mentor'
     ];
 }

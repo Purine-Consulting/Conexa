@@ -24,6 +24,14 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
      */
     public function sessions()
     {
-        return $this->hasMany('\App\Mentor', 'mentor');
+        return $this->hasMany('\App\Session', 'mentor');
+    }
+
+    /**
+     * Avoir les notes d'un mentor
+     */
+    public function marks()
+    {
+        return $this->hasMany('\App\Mark', 'mentor');
     }
 }
