@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Applicant;
 use App\Mentee;
+use App\Mentor;
 
 class AuthController extends Controller
 {
@@ -47,9 +48,12 @@ class AuthController extends Controller
             $applicant->grade = $request->input('grade');
             $applicant->save();
 
-            switch ($request->input('type')) {
+            switch ($request->input('role')) {
                 case 'mentor':
-                    # code...
+                    $mentor = new Mentor();
+                    $mentor->id = $applicant->id;
+                    $mentor->linkedIn = $request->input('linkedIn');
+                    $mentor->save();
                     break;
                 
                 case 'mentee':
