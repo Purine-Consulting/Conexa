@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Applicant;
+use App\Mentee;
 
 class AuthController extends Controller
 {
@@ -45,6 +46,22 @@ class AuthController extends Controller
             $applicant->id = $user->id;
             $applicant->grade = $request->input('grade');
             $applicant->save();
+
+            switch ($request->input('type')) {
+                case 'mentor':
+                    # code...
+                    break;
+                
+                case 'mentee':
+                    $mentee = new Mentee;
+                    $mentee->id = $applicant->id;
+                    $mentee->save();
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
 
             return response()->json(['user' => $user, 'message' => 'Utilisateur créé avec succès'], 201);
         } catch (\Exception $e) {
