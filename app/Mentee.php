@@ -26,4 +26,12 @@ class Mentee extends Model implements AuthenticatableContract, AuthorizableContr
     {
         return $this->hasMany('\App\Invoice', 'mentee');
     }
+
+    /**
+     * Avoir les sessions d'un mentoré
+     */
+    public function sessions()
+    {
+        return $this->hasMany('\App\Mentee', 'mentee');
+    }
 }
