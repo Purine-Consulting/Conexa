@@ -34,4 +34,12 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
     {
         return $this->hasMany('\App\Mark', 'mentor');
     }
+
+    /**
+     * Retourne les domaines de compétence
+     */
+    public function areas()
+    {
+        return $this->belongsToMany('\App\Area', 'area_mentor', 'mentor', 'area');
+    }
 }
