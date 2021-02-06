@@ -50,7 +50,7 @@ class AuthController extends Controller
 
             switch ($request->input('role')) {
                 case 'mentor':
-                    $mentor = new Mentor();
+                    $mentor = new Mentor;
                     $mentor->id = $applicant->id;
                     $mentor->linkedIn = $request->input('linkedIn');
                     $mentor->save();
