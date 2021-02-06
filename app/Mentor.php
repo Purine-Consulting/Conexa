@@ -36,6 +36,14 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
     }
 
     /**
+     * Retourne les aptitudes
+     */
+    public function skills()
+    {
+        return $this->belongsToMany('\App\Skill', 'mentor_skill', 'mentor', 'skill');
+    }
+
+    /**
      * Retourne les domaines de compétence
      */
     public function areas()

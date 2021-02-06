@@ -22,9 +22,9 @@ class Skill extends Model implements AuthenticatableContract, AuthorizableContra
     /**
      * Retourne les mentors ayant cette aptitude
      */
-    public function mentorSkills()
+    public function mentors()
     {
-        return $this->hasMany('\App\MentorSkill', 'skill');
+        return $this->belongsToMany('\App\Mentor', 'mentor_skill', 'skill', 'mentor');
     }
 
     /**
