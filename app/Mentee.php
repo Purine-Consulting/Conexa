@@ -20,6 +20,14 @@ class Mentee extends Model implements AuthenticatableContract, AuthorizableContr
     protected $table = 'mentee';
 
     /**
+     * Retourne l'applicant
+     */
+    public function applicant()
+    {
+        return $this->belongsTo('\App\Applicant', 'id');
+    }
+
+    /**
      * Avoir les factures d'un mentoré
      */
     public function invoices()

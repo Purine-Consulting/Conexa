@@ -20,6 +20,22 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
     protected $table = 'applicant';
 
     /**
+     * Relation avec Mentor
+     */
+    public function mentors()
+    {
+        return $this->hasMany('\App\Mentor', 'id');
+    }
+
+    /**
+     * Relation avec Mentoré
+     */
+    public function mentees()
+    {
+        return $this->hasMany('\App\Mentee', 'id');
+    }
+
+    /**
      * Avoir le grade d'un applicant
      */
     public function grade()

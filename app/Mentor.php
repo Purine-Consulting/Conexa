@@ -20,6 +20,14 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
     protected $table = 'mentor';
 
     /**
+     * Retourne l'applicant
+     */
+    public function applicant()
+    {
+        return $this->belongsTo('\App\Applicant', 'id');
+    }
+
+    /**
      * Avoir les sessions d'un mentor
      */
     public function sessions()
