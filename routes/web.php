@@ -15,33 +15,33 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function() use ($router) {
+$router->group(['prefix' => 'api'], function () use ($router) {
     // Authentication management
-    $router->group(['prefix' => 'auth'], function() use ($router) {
+    $router->group(['prefix' => 'auth'], function () use ($router) {
         $router->post('login', 'AuthController@login');
         $router->post('register', 'AuthController@register');
     });
-    
+
     // User management endpoints
-    $router->group(['prefix' => 'users'], function() use ($router) {
+    $router->group(['prefix' => 'users'], function () use ($router) {
         $router->get('/', 'UserController@showAllUsers');
         $router->get('/{id}', 'UserController@showOneUser');
     });
 
     // Mentor management endpoints
-    $router->group(['prefix' => 'mentors'], function() use ($router) {
+    $router->group(['prefix' => 'mentors'], function () use ($router) {
         $router->get('/', 'MentorController@showAllMentors');
         $router->get('/{id}', 'MentorController@showOneMentor');
-        $router->get('update/{id}', 'MentorController@update');
-        $router->get('delete/{id}', 'MentorController@delete');
+        $router->put('update/{id}', 'MentorController@update');
+        $router->delete('delete/{id}', 'MentorController@delete');
     });
 
     // Mentee management endpoints
-    $router->group(['prefix' => 'mentess'], function() use ($router) {
+    $router->group(['prefix' => 'mentees'], function () use ($router) {
         $router->get('/', 'MenteeController@showAllMentors');
         $router->get('/{id}', 'MenteeController@showOneMentor');
-        $router->get('update/{id}', 'MenteeController@update');
-        $router->get('delete/{id}', 'MenteeController@delete');
+        $router->put('update/{id}', 'MenteeController@update');
+        $router->delete('delete/{id}', 'MenteeController@delete');
     });
 
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
