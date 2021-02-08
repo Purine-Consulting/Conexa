@@ -38,6 +38,8 @@ class MenteeController extends Controller
     {
         $mentee = mentee::findOrFail($id);
         $mentee->update($request->all());
+        $mentee->applicant->update($request->all());
+        $mentee->applicant->user->update($request->all());
         return response()->json($mentee, 200);
     }
 

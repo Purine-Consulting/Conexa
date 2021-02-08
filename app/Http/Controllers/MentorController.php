@@ -38,6 +38,8 @@ class MentorController extends Controller
     {
         $mentor = Mentor::findOrFail($id);
         $mentor->update($request->all());
+        $mentor->applicant->update($request->all());
+        $mentor->applicant->user->update($request->all());
         return response()->json($mentor, 200);
     }
 
