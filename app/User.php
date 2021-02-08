@@ -43,7 +43,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function Applicant()
     {
-        return $this->hasOne('\App\Applicant');
+        return $this->hasOne('\App\Applicant', 'id');
     }
 
     /**

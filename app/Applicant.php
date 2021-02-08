@@ -33,7 +33,7 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
      */
     public function User()
     {
-        return $this->belongsTo('\App\User');
+        return $this->belongsTo('\App\User', 'id');
     }
 
     /**

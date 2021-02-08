@@ -13,7 +13,11 @@ class MentorController extends Controller
      */
     public function showAllMentors()
     {
-        return response()->json(Mentor::all()->applicant()->user());
+        $mentors = Mentor::all();
+        foreach ($mentors as $mentor) {
+            $mentor = $mentor->applicant->user;
+        }
+        return response()->json($mentors);
     }
 
     /**
@@ -24,6 +28,8 @@ class MentorController extends Controller
      */
     public function showOneMentor($id)
     {
-        return response()->json(Mentor::find($id)->applicant()->user());
+        $mentor = Mentor::findOrFail($id);
+        $mentor = $mentor->applicant->user;
+        return response()->json($mentor);
     }
 }
