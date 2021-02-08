@@ -51,6 +51,7 @@ class AuthController extends Controller
             switch ($request->input('role')) {
                 case 'mentor':
                     $mentor = new Mentor;
+                    $applicant = Applicant::findOrFail($user->id);
                     $mentor->id = $applicant->id;
                     $mentor->linkedIn = $request->input('linkedIn');
                     $mentor->save();
@@ -58,6 +59,7 @@ class AuthController extends Controller
                 
                 case 'mentee':
                     $mentee = new Mentee;
+                    $applicant = Applicant::findOrFail($user->id);
                     $mentee->id = $applicant->id;
                     $mentee->save();
                     break;
