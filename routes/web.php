@@ -36,6 +36,14 @@ $router->group(['prefix' => 'api'], function() use ($router) {
         $router->get('delete/{id}', 'MentorController@delete');
     });
 
+    // Mentee management endpoints
+    $router->group(['prefix' => 'mentess'], function() use ($router) {
+        $router->get('/', 'MenteeController@showAllMentors');
+        $router->get('/{id}', 'MenteeController@showOneMentor');
+        $router->get('update/{id}', 'MenteeController@update');
+        $router->get('delete/{id}', 'MenteeController@delete');
+    });
+
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
     });
 });
