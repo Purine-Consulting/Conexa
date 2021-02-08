@@ -39,6 +39,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     /**
+     * Relation avec Applicant
+     */
+    public function Applicant()
+    {
+        return $this->hasOne('\App\Applicant');
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

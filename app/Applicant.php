@@ -29,6 +29,14 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
     ];
 
     /**
+     * Relation avec User
+     */
+    public function User()
+    {
+        return $this->belongsTo('\App\User');
+    }
+
+    /**
      * Relation avec Mentor
      */
     public function mentors()
