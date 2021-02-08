@@ -26,22 +26,24 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'users'], function () use ($router) {
         $router->get('/', 'UserController@showAllUsers');
         $router->get('/{id}', 'UserController@showOneUser');
+        $router->put('/{id}', 'UserController@update');
+        $router->delete('/{id}', 'UserController@delete');
     });
 
     // Mentor management endpoints
     $router->group(['prefix' => 'mentors'], function () use ($router) {
         $router->get('/', 'MentorController@showAllMentors');
         $router->get('/{id}', 'MentorController@showOneMentor');
-        $router->put('update/{id}', 'MentorController@update');
-        $router->delete('delete/{id}', 'MentorController@delete');
+        $router->put('/{id}', 'MentorController@update');
+        $router->delete('/{id}', 'MentorController@delete');
     });
 
     // Mentee management endpoints
     $router->group(['prefix' => 'mentees'], function () use ($router) {
         $router->get('/', 'MenteeController@showAllMentors');
         $router->get('/{id}', 'MenteeController@showOneMentor');
-        $router->put('update/{id}', 'MenteeController@update');
-        $router->delete('delete/{id}', 'MenteeController@delete');
+        $router->put('/{id}', 'MenteeController@update');
+        $router->delete('/{id}', 'MenteeController@delete');
     });
 
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
