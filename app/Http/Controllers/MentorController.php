@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mentor;
+use Illuminate\Http\Request;
 
 class MentorController extends Controller
 {
@@ -31,5 +32,18 @@ class MentorController extends Controller
         $mentor = Mentor::findOrFail($id);
         $mentor = $mentor->applicant->user;
         return response()->json($mentor);
+    }
+
+    public function update($id, Request $request)
+    {
+        $mentor = Mentor::findOrFail($id);
+        $mentor->update($request->all());
+        return response()->json($mentor, 200);
+    }
+
+    public function delete($id)
+    {
+        Mentor::findOrFail($id)->delete();
+        return response('Supprimé avec succès!', 200);
     }
 }

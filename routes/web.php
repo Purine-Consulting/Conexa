@@ -32,6 +32,8 @@ $router->group(['prefix' => 'api'], function() use ($router) {
     $router->group(['prefix' => 'mentors'], function() use ($router) {
         $router->get('/', 'MentorController@showAllMentors');
         $router->get('/{id}', 'MentorController@showOneMentor');
+        $router->get('update/{id}', 'MentorController@update');
+        $router->get('delete/{id}', 'MentorController@delete');
     });
 
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
