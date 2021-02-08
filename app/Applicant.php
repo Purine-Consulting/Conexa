@@ -20,6 +20,15 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
     protected $table = 'applicant';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'grade'
+    ];
+
+    /**
      * Relation avec Mentor
      */
     public function mentors()
@@ -44,11 +53,18 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * Retourne les aptitudes
      */
-    protected $fillable = [
-        'grade'
-    ];
+    public function skills()
+    {
+        return $this->belongsToMany('\App\Skill', 'applicant_skill', 'applicant', 'skill')->withTimestamps();
+    }
+
+    /**
+     * Retourne les domaines de compétence
+     */
+    public function areas()
+    {
+        return $this->belongsToMany('\App\Area', 'applicant_area', 'applicant', 'area')->withTimestamps();
+    }
 }
