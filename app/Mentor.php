@@ -20,6 +20,15 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
     protected $table = 'mentor';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'linkedIn'
+    ];
+
+    /**
      * Retourne l'applicant
      */
     public function applicant()
@@ -41,21 +50,5 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
     public function marks()
     {
         return $this->hasMany('\App\Mark', 'mentor');
-    }
-
-    /**
-     * Retourne les aptitudes
-     */
-    public function skills()
-    {
-        return $this->belongsToMany('\App\Skill', 'mentor_skill', 'mentor', 'skill');
-    }
-
-    /**
-     * Retourne les domaines de compétence
-     */
-    public function areas()
-    {
-        return $this->belongsToMany('\App\Area', 'area_mentor', 'mentor', 'area');
     }
 }

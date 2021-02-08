@@ -20,11 +20,11 @@ class Area extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'area';
 
     /**
-     * Retourne les mentors étant dans ce domaine
+     * Retourne les applicants étant dans ce domaine
      */
     public function mentors()
     {
-        return $this->belongsToMany('\App\Mentor', 'area_mentor', 'area', 'mentor');
+        return $this->belongsToMany('\App\Applicant', 'applicant_area', 'area', 'applicant')->withTimestamps();
     }
 
     /**
