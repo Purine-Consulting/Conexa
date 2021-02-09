@@ -46,8 +46,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', 'MenteeController@delete');
     });
 
-    // Mentor management endpoints
+    // Session management endpoints
     $router->group(['prefix' => 'sessions'], function () use ($router) {
+        $router->post('/', 'SessionController@create');
         $router->get('/', 'SessionController@showAll');
         $router->get('/{id}', 'SessionController@showOne');
         $router->put('/{id}', 'SessionController@update');

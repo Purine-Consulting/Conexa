@@ -50,18 +50,17 @@ class AuthController extends Controller
             $applicant->facebook = $request->input('facebook');
             $applicant->twitter = $request->input('twitter');
             $applicant->save();
+            $applicant = Applicant::findOrFail($user->id);
 
             switch ($request->input('role')) {
                 case 'mentor':
                     $mentor = new Mentor;
-                    $applicant = Applicant::findOrFail($user->id);
                     $mentor->id = $applicant->id;
                     $mentor->save();
                     break;
                 
                 case 'mentee':
                     $mentee = new Mentee;
-                    $applicant = Applicant::findOrFail($user->id);
                     $mentee->id = $applicant->id;
                     $mentee->save();
                     break;
