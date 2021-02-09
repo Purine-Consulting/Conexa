@@ -38,6 +38,8 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Relation avec Mentor
+     * 
+     * @return Mentor
      */
     public function mentors()
     {
@@ -46,6 +48,8 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Relation avec Mentoré
+     * 
+     * @return Mentee
      */
     public function mentees()
     {
@@ -54,6 +58,8 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Avoir le grade d'un applicant
+     * 
+     * @return Grade
      */
     public function grade()
     {
@@ -62,6 +68,8 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Retourne les aptitudes
+     * 
+     * @return Skill
      */
     public function skills()
     {
@@ -70,6 +78,8 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Retourne les domaines de compétence
+     * 
+     * @return Area
      */
     public function areas()
     {
