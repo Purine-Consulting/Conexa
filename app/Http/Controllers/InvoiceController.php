@@ -50,7 +50,10 @@ class InvoiceController extends Controller
         ]);
 
         $invoice = Invoice::findOrFail($id);
-        $invoice->update($request->all());
+        $invoice->lib = $request->input('lib');
+        $invoice->amount = $request->input('amount');
+        $invoice->mentee = $request->input('mentee');
+        $invoice->save();
         return response()->json($invoice, 200);
     }
     
