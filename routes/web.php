@@ -74,13 +74,22 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', 'AreaController@delete');
     });
 
-    // Area management endpoints
+    // Skill management endpoints
     $router->group(['prefix' => 'skills'], function () use ($router) {
         $router->post('/', 'SkillController@create');
         $router->get('/', 'SkillController@showAll');
         $router->get('/{id}', 'SkillController@showOne');
         $router->put('/{id}', 'SkillController@update');
         $router->delete('/{id}', 'SkillController@delete');
+    });
+
+    // Invoice management endpoints
+    $router->group(['prefix' => 'invoices'], function () use ($router) {
+        $router->post('/', 'InvoiceController@create');
+        $router->get('/', 'InvoiceController@showAll');
+        $router->get('/{id}', 'InvoiceController@showOne');
+        $router->put('/{id}', 'InvoiceController@update');
+        $router->delete('/{id}', 'InvoiceController@delete');
     });
     
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
