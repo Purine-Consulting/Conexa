@@ -55,7 +55,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', 'SessionController@delete');
     });
     
-
     // Activity management endpoints
     $router->group(['prefix' => 'activities'], function () use ($router) {
         $router->post('/', 'ActivityController@create');
@@ -65,15 +64,23 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', 'ActivityController@delete');
         $router->get('/{id}/session', 'ActivityController@showSession');
     });
-    
 
-    // Activity management endpoints
+    // Area management endpoints
     $router->group(['prefix' => 'areas'], function () use ($router) {
         $router->post('/', 'AreaController@create');
         $router->get('/', 'AreaController@showAll');
         $router->get('/{id}', 'AreaController@showOne');
         $router->put('/{id}', 'AreaController@update');
         $router->delete('/{id}', 'AreaController@delete');
+    });
+
+    // Area management endpoints
+    $router->group(['prefix' => 'skills'], function () use ($router) {
+        $router->post('/', 'SkillController@create');
+        $router->get('/', 'SkillController@showAll');
+        $router->get('/{id}', 'SkillController@showOne');
+        $router->put('/{id}', 'SkillController@update');
+        $router->delete('/{id}', 'SkillController@delete');
     });
     
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
