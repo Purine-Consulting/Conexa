@@ -49,6 +49,12 @@ class MenteeController extends Controller
         return response('Supprimé avec succès!', 200);
     }
 
+    public function getSkill($id)
+    {
+        $mentee = Mentee::findOrFail($id);
+        return response()->json($mentee->applicant->skills, 200);
+    }
+
     public function setSkill($id, Request $request)
     {
         $mentee = Mentee::findOrFail($id);

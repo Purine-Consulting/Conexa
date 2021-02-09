@@ -36,6 +36,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}', 'MentorController@showOne');
         $router->put('/{id}', 'MentorController@update');
         $router->delete('/{id}', 'MentorController@delete');
+        $router->get('/{id}/skill', 'MentorController@getSkill');
         $router->post('/{id}/skill', 'MentorController@setSkill');
         $router->delete('/{id}/skill', 'MentorController@deleteSkill');
     });
@@ -46,6 +47,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}', 'MenteeController@showOne');
         $router->put('/{id}', 'MenteeController@update');
         $router->delete('/{id}', 'MenteeController@delete');
+        $router->get('/{id}/skill', 'MenteeController@getSkill');
         $router->post('/{id}/skill', 'MenteeController@setSkill');
         $router->delete('/{id}/skill', 'MenteeController@deleteSkill');
     });
