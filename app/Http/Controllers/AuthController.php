@@ -46,6 +46,9 @@ class AuthController extends Controller
             $applicant = new Applicant;
             $applicant->id = $user->id;
             $applicant->grade = $request->input('grade');
+            $applicant->linkedIn = $request->input('linkedIn');
+            $applicant->facebook = $request->input('facebook');
+            $applicant->twitter = $request->input('twitter');
             $applicant->save();
 
             switch ($request->input('role')) {
@@ -53,7 +56,6 @@ class AuthController extends Controller
                     $mentor = new Mentor;
                     $applicant = Applicant::findOrFail($user->id);
                     $mentor->id = $applicant->id;
-                    $mentor->linkedIn = $request->input('linkedIn');
                     $mentor->save();
                     break;
                 

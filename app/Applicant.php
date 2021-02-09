@@ -25,7 +25,7 @@ class Applicant extends Model implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $fillable = [
-        'grade'
+        'grade', 'linkedIn', 'facebook', 'twitter'
     ];
 
     /**

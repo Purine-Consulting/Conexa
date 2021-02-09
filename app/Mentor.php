@@ -25,7 +25,7 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
      * @var array
      */
     protected $fillable = [
-        'linkedIn'
+        ''
     ];
 
     /**
