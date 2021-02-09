@@ -66,6 +66,16 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}/session', 'ActivityController@showSession');
     });
     
+
+    // Activity management endpoints
+    $router->group(['prefix' => 'areas'], function () use ($router) {
+        $router->post('/', 'AreaController@create');
+        $router->get('/', 'AreaController@showAll');
+        $router->get('/{id}', 'AreaController@showOne');
+        $router->put('/{id}', 'AreaController@update');
+        $router->delete('/{id}', 'AreaController@delete');
+    });
+    
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
     });
 });
