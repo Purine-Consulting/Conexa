@@ -53,16 +53,12 @@ class InvoiceController extends Controller
         $invoice->update($request->all());
         return response()->json($invoice, 200);
     }
-
-    public function delete($id)
-    {
-        Invoice::findOrFail($id)->delete();
-        return response('Supprimé avec succès!', 200);
-    }
-
-    public function showSession($id)
+    
+    public function cancel($id)
     {
         $invoice = Invoice::findOrFail($id);
+        $invoice->status = 2;
+        $invoice->update();
         return response()->json($invoice, 200);
     }
 }

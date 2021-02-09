@@ -28,7 +28,7 @@ class Invoice extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array
      */
     protected $fillable = [
-        'lib', 'amount', 'mentee'
+        'lib', 'desc', 'amount', 'mentee', 'status'
     ];
 
     /**

@@ -89,7 +89,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/', 'InvoiceController@showAll');
         $router->get('/{id}', 'InvoiceController@showOne');
         $router->put('/{id}', 'InvoiceController@update');
-        $router->delete('/{id}', 'InvoiceController@delete');
+        $router->put('/{id}/cancel', 'InvoiceController@cancel');
     });
     
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
