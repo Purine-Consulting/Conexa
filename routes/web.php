@@ -39,6 +39,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}/skill', 'MentorController@getSkill');
         $router->post('/{id}/skill', 'MentorController@setSkill');
         $router->delete('/{id}/skill', 'MentorController@deleteSkill');
+        $router->get('/{id}/area', 'MentorController@getArea');
+        $router->post('/{id}/area', 'MentorController@setArea');
+        $router->delete('/{id}/area', 'MentorController@deleteArea');
     });
     
     // Mentee management endpoints
@@ -50,6 +53,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}/skill', 'MenteeController@getSkill');
         $router->post('/{id}/skill', 'MenteeController@setSkill');
         $router->delete('/{id}/skill', 'MenteeController@deleteSkill');
+        $router->get('/{id}/area', 'MenteeController@getArea');
+        $router->post('/{id}/area', 'MenteeController@setArea');
+        $router->delete('/{id}/area', 'MenteeController@deleteArea');
     });
 
     // Session management endpoints

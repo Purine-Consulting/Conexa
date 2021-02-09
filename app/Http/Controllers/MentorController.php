@@ -68,4 +68,24 @@ class MentorController extends Controller
         $mentor->applicant->skills()->detach($request->skill);
         return response()->json($mentor->applicant->skills, 200);
     }
+
+    public function getArea($id)
+    {
+        $mentor = Mentor::findOrFail($id);
+        return response()->json($mentor->applicant->areas, 200);
+    }
+
+    public function setArea($id, Request $request)
+    {
+        $mentor = Mentor::findOrFail($id);
+        $mentor->applicant->areas()->attach($request->area);
+        return response()->json($mentor->applicant->areas, 200);
+    }
+
+    public function deleteArea($id, Request $request)
+    {
+        $mentor = Mentor::findOrFail($id);
+        $mentor->applicant->areas()->detach($request->area);
+        return response()->json($mentor->applicant->areas, 200);
+    }
 }

@@ -68,4 +68,24 @@ class MenteeController extends Controller
         $mentee->applicant->skills()->detach($request->skill);
         return response()->json($mentee->applicant->skills, 200);
     }
+
+    public function getArea($id)
+    {
+        $mentee = Mentee::findOrFail($id);
+        return response()->json($mentee->applicant->areas, 200);
+    }
+
+    public function setArea($id, Request $request)
+    {
+        $mentee = Mentee::findOrFail($id);
+        $mentee->applicant->areas()->attach($request->area);
+        return response()->json($mentee->applicant->areas, 200);
+    }
+
+    public function deleteArea($id, Request $request)
+    {
+        $mentee = Mentee::findOrFail($id);
+        $mentee->applicant->areas()->detach($request->area);
+        return response()->json($mentee->applicant->areas, 200);
+    }
 }
