@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use App\Session;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -37,8 +38,8 @@ class ActivityController extends Controller
             'session'       => 'required'
         ]);
 
-        $Activity = Activity::create($request->all());
-        return response()->json($Activity, 201);
+        $activity = Activity::create($request->all());
+        return response()->json($activity, 201);
     }
     
     public function update($id, Request $request)
@@ -49,14 +50,21 @@ class ActivityController extends Controller
             'end_date'      => 'required'
         ]);
 
-        $Activity = Activity::findOrFail($id);
-        $Activity->update($request->all());
-        return response()->json($Activity, 200);
+        $activity = Activity::findOrFail($id);
+        $activity->update($request->all());
+        return response()->json($activity, 200);
     }
 
     public function delete($id)
     {
         Activity::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
+    }
+
+    public function showSession($id)
+    {
+        $activity = Activity::findOrFail($id);
+        $session = Session::findOrFail($activity->session);
+        return response()->json($session, 200);
     }
 }

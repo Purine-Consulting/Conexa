@@ -63,6 +63,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}', 'ActivityController@showOne');
         $router->put('/{id}', 'ActivityController@update');
         $router->delete('/{id}', 'ActivityController@delete');
+        $router->get('/{id}/session', 'ActivityController@showSession');
     });
     
     $router->group(['middleware' => 'auth:api'], function () use ($router) {

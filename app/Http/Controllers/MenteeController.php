@@ -29,14 +29,14 @@ class MenteeController extends Controller
      */
     public function showOne($id)
     {
-        $mentee = mentee::findOrFail($id);
+        $mentee = Mentee::findOrFail($id);
         $mentee = $mentee->applicant->user;
         return response()->json($mentee);
     }
 
     public function update($id, Request $request)
     {
-        $mentee = mentee::findOrFail($id);
+        $mentee = Mentee::findOrFail($id);
         $mentee->update($request->all());
         $mentee->applicant->update($request->all());
         $mentee->applicant->user->update($request->all());
