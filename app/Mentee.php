@@ -18,7 +18,7 @@ class Mentee extends Model implements AuthenticatableContract, AuthorizableContr
      * @var string
      */
     protected $table = 'mentee';
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -49,6 +49,14 @@ class Mentee extends Model implements AuthenticatableContract, AuthorizableContr
      */
     public function sessions()
     {
-        return $this->hasMany('\App\Mentee', 'mentee');
+        return $this->hasMany('\App\Session', 'mentee');
+    }
+
+    /**
+     * Avoir les notes d'un mentoré
+     */
+    public function marks()
+    {
+        return $this->hasMany('\App\Mark', 'mentee');
     }
 }

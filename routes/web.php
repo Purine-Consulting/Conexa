@@ -99,6 +99,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}', 'PaymentController@showOne');
         $router->put('/{id}', 'PaymentController@update');
     });
+
+    // Mark management endpoints
+    $router->group(['prefix' => 'marks'], function () use ($router) {
+        $router->post('/', 'MarkController@create');
+        $router->get('/', 'MarkController@showAll');
+        $router->get('/{id}', 'MarkController@showOne');
+        $router->put('/{id}', 'MarkController@update');
+        $router->delete('/{id}', 'MarkController@delete');
+    });
     
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
     });

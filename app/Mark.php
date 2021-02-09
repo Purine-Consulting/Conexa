@@ -28,11 +28,19 @@ class Mark extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
+     * Avoir le mentoré d'une note
+     */
+    public function mentee()
+    {
+        return $this->belongsTo('\App\Mentee', 'mentee');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'value', 'mentor'
+        'value', 'mentor', 'mentee'
     ];
 }
