@@ -55,6 +55,16 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', 'SessionController@delete');
     });
     
+
+    // Activity management endpoints
+    $router->group(['prefix' => 'activities'], function () use ($router) {
+        $router->post('/', 'ActivityController@create');
+        $router->get('/', 'ActivityController@showAll');
+        $router->get('/{id}', 'ActivityController@showOne');
+        $router->put('/{id}', 'ActivityController@update');
+        $router->delete('/{id}', 'ActivityController@delete');
+    });
+    
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
     });
 });
