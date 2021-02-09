@@ -18,6 +18,15 @@ class Mentee extends Model implements AuthenticatableContract, AuthorizableContr
      * @var string
      */
     protected $table = 'mentee';
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        ''
+    ];
 
     /**
      * Retourne l'applicant
