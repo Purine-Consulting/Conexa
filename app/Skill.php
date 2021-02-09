@@ -22,7 +22,7 @@ class Skill extends Model implements AuthenticatableContract, AuthorizableContra
     /**
      * Retourne les applicants ayant cette aptitude
      */
-    public function mentors()
+    public function applicants()
     {
         return $this->belongsToMany('\App\Applicant', 'applicant_skill', 'skill', 'applicant')->withTimestamps();
     }

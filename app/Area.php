@@ -22,7 +22,7 @@ class Area extends Model implements AuthenticatableContract, AuthorizableContrac
     /**
      * Retourne les applicants étant dans ce domaine
      */
-    public function mentors()
+    public function applicants()
     {
         return $this->belongsToMany('\App\Applicant', 'applicant_area', 'area', 'applicant')->withTimestamps();
     }
