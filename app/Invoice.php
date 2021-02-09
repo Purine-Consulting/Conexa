@@ -18,6 +18,18 @@ class Invoice extends Model implements AuthenticatableContract, AuthorizableCont
      * @var string
      */
     protected $table = 'invoice';
+    protected $attributes = [
+        'status' => 1
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'lib', 'amount', 'mentee'
+    ];
 
     /**
      * Avoir les paiements d'une facture
@@ -34,13 +46,4 @@ class Invoice extends Model implements AuthenticatableContract, AuthorizableCont
     {
         return $this->belongsTo('\App\Mentee', 'mentee');
     }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'lib', 'amount', 'mentee'
-    ];
 }
