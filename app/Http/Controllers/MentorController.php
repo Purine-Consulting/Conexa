@@ -12,7 +12,7 @@ class MentorController extends Controller
      * 
      * @return Mentor
      */
-    public function showAllMentors()
+    public function showAll()
     {
         $mentors = Mentor::all();
         foreach ($mentors as $mentor) {
@@ -27,7 +27,7 @@ class MentorController extends Controller
      * @param $id Identifiant du mentor
      * @return User
      */
-    public function showOneMentor($id)
+    public function showOne($id)
     {
         $mentor = Mentor::findOrFail($id);
         $mentor = $mentor->applicant->user;

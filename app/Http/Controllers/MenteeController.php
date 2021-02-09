@@ -12,7 +12,7 @@ class MenteeController extends Controller
      * 
      * @return mentee
      */
-    public function showAllMentees()
+    public function showAll()
     {
         $mentees = Mentee::all();
         foreach ($mentees as $mentee) {
@@ -27,7 +27,7 @@ class MenteeController extends Controller
      * @param $id Identifiant du mentee
      * @return User
      */
-    public function showOnementee($id)
+    public function showOne($id)
     {
         $mentee = mentee::findOrFail($id);
         $mentee = $mentee->applicant->user;

@@ -12,7 +12,7 @@ class UserController extends Controller
      * 
      * @return User
      */
-    public function showAllUsers()
+    public function showAll()
     {
         return response()->json(User::all());
     }
@@ -23,13 +23,20 @@ class UserController extends Controller
      * @param $id Identifiant de l'utilisateur
      * @return User
      */
-    public function showOneUser($id)
+    public function showOne($id)
     {
         return response()->json(User::find($id));
     } 
     
     public function update($id, Request $request)
     {
+        $this->validate($request, [
+            'firstname' => 'string',
+            'lastname'  => 'string',
+            'email'     => 'email|unique:user',
+            'password'  => 'confirmed',
+        ]);
+
         $user = User::findOrFail($id);
         $user->update($request->all());
         return response()->json($user, 200);
