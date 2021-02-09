@@ -91,6 +91,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('/{id}', 'InvoiceController@update');
         $router->put('/{id}/cancel', 'InvoiceController@cancel');
     });
+
+    // Payment management endpoints
+    $router->group(['prefix' => 'payments'], function () use ($router) {
+        $router->post('/', 'PaymentController@create');
+        $router->get('/', 'PaymentController@showAll');
+        $router->get('/{id}', 'PaymentController@showOne');
+        $router->put('/{id}', 'PaymentController@update');
+    });
     
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
     });
