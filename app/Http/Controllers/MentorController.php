@@ -48,4 +48,18 @@ class MentorController extends Controller
         Mentor::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }
+
+    public function setSkill($id, Request $request)
+    {
+        $mentor = Mentor::findOrFail($id);
+        $mentor->applicant->skills()->attach($request->skill);
+        return response()->json($mentor->applicant->skills, 200);
+    }
+
+    public function deleteSkill($id, Request $request)
+    {
+        $mentor = Mentor::findOrFail($id);
+        $mentor->applicant->skills()->detach($request->skill);
+        return response()->json($mentor->applicant->skills, 200);
+    }
 }

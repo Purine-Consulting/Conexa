@@ -48,4 +48,18 @@ class MenteeController extends Controller
         mentee::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }
+
+    public function setSkill($id, Request $request)
+    {
+        $mentee = Mentee::findOrFail($id);
+        $mentee->applicant->skills()->attach($request->skill);
+        return response()->json($mentee->applicant->skills, 200);
+    }
+
+    public function deleteSkill($id, Request $request)
+    {
+        $mentee = Mentee::findOrFail($id);
+        $mentee->applicant->skills()->detach($request->skill);
+        return response()->json($mentee->applicant->skills, 200);
+    }
 }
