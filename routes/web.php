@@ -11,9 +11,9 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     // Authentication management
@@ -25,7 +25,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['middleware' => 'auth:api'], function () use ($router) {
         // User management endpoints
-        $router->group(['prefix' => 'users'], function () use ($router) {
+        $router->group(['prefix' => 'users', 'middleware' => ['role:admin']], function () use ($router) {
             $router->get('/', 'UserController@showAll');
             $router->get('/{id}', 'UserController@showOne');
             $router->put('/{id}', 'UserController@update');
