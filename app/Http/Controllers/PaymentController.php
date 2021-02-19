@@ -14,6 +14,9 @@ class PaymentController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_payments')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Payment::all());
     }
 
@@ -26,11 +29,17 @@ class PaymentController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_payment')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Payment::find($id));
     } 
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_payment')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'ref'       => 'required',
             'date'      => 'required',
@@ -43,6 +52,9 @@ class PaymentController extends Controller
     
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_payment')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'ref'       => 'required',
             'date'      => 'required',

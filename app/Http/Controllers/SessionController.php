@@ -14,6 +14,9 @@ class SessionController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_sessions')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Session::all());
     }
 
@@ -25,11 +28,17 @@ class SessionController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_session')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Session::find($id));
     } 
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('create_session')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'mentor'    => 'required',
             'mentee'    => 'required',
@@ -42,6 +51,9 @@ class SessionController extends Controller
     
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_session')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'date' => 'required',
         ]);
@@ -53,6 +65,9 @@ class SessionController extends Controller
 
     public function delete($id)
     {
+        if (!auth()->user()->hasPermissionTo('delete_session')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         Session::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }

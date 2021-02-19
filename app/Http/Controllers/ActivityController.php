@@ -15,6 +15,9 @@ class ActivityController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_activities')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Activity::all());
     }
 
@@ -26,11 +29,17 @@ class ActivityController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_activity')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Activity::find($id));
     } 
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_activity')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'desc'          => 'required',
             'start_date'    => 'required',
@@ -44,6 +53,9 @@ class ActivityController extends Controller
     
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_activity')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'desc'          => 'required',
             'start_date'    => 'required',
@@ -57,12 +69,18 @@ class ActivityController extends Controller
 
     public function delete($id)
     {
+        if (!auth()->user()->hasPermissionTo('delete_activity')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         Activity::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }
 
     public function showSession($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_activity_session')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $activity = Activity::findOrFail($id);
         $session = Session::findOrFail($activity->session);
         return response()->json($session, 200);

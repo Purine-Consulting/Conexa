@@ -14,6 +14,9 @@ class MarkController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_marks')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Mark::all());
     }
 
@@ -26,11 +29,17 @@ class MarkController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_mark')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Mark::find($id));
     }
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_mark')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'value'     => 'required',
             'mentor'    => 'required',
@@ -43,6 +52,9 @@ class MarkController extends Controller
 
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_mark')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'value'     => 'required',
             'mentor'    => 'required',
@@ -56,6 +68,9 @@ class MarkController extends Controller
 
     public function delete($id)
     {
+        if (!auth()->user()->hasPermissionTo('delete_mark')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         Mark::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }

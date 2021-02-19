@@ -14,6 +14,9 @@ class InvoiceController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_invoices')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Invoice::all());
     }
 
@@ -26,11 +29,17 @@ class InvoiceController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_invoice')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Invoice::find($id));
     } 
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('see_invoices')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'lib'       => 'required',
             'amount'    => 'required',
@@ -43,6 +52,9 @@ class InvoiceController extends Controller
     
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_invoice')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'lib'       => 'required',
             'amount'    => 'required',
@@ -59,6 +71,9 @@ class InvoiceController extends Controller
     
     public function cancel($id)
     {
+        if (!auth()->user()->hasPermissionTo('cancel_invoice')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $invoice = Invoice::findOrFail($id);
         $invoice->status = 2;
         $invoice->update();

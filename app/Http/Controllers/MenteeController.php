@@ -14,6 +14,9 @@ class MenteeController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_mentees')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentees = Mentee::all();
         foreach ($mentees as $mentee) {
             $mentee = $mentee->applicant->user;
@@ -25,10 +28,13 @@ class MenteeController extends Controller
      * Return one 
      * 
      * @param $id Identifiant du mentee
-     * @return User
+     * @return Mentee
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_mentee')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         $mentee = $mentee->applicant->user;
         return response()->json($mentee);
@@ -36,6 +42,9 @@ class MenteeController extends Controller
 
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_mentee')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         $mentee->update($request->all());
         $mentee->applicant->update($request->all());
@@ -45,18 +54,27 @@ class MenteeController extends Controller
 
     public function delete($id)
     {
+        if (!auth()->user()->hasPermissionTo('delete_mentee')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         mentee::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }
 
     public function getSkill($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_mentee_skills')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         return response()->json($mentee->applicant->skills, 200);
     }
 
     public function setSkill($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_mentee_skill')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         $mentee->applicant->skills()->attach($request->skill);
         return response()->json($mentee->applicant->skills, 200);
@@ -64,6 +82,9 @@ class MenteeController extends Controller
 
     public function deleteSkill($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('delete_mentee_skill')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         $mentee->applicant->skills()->detach($request->skill);
         return response()->json($mentee->applicant->skills, 200);
@@ -71,12 +92,18 @@ class MenteeController extends Controller
 
     public function getArea($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_mentee_areas')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         return response()->json($mentee->applicant->areas, 200);
     }
 
     public function setArea($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_mentee_area')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         $mentee->applicant->areas()->attach($request->area);
         return response()->json($mentee->applicant->areas, 200);
@@ -84,6 +111,9 @@ class MenteeController extends Controller
 
     public function deleteArea($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('delete_mentee_area')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $mentee = Mentee::findOrFail($id);
         $mentee->applicant->areas()->detach($request->area);
         return response()->json($mentee->applicant->areas, 200);

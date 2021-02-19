@@ -14,6 +14,9 @@ class AreaController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_areas')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Area::all());
     }
 
@@ -25,11 +28,17 @@ class AreaController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_area')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Area::find($id));
     }
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_area')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'lib' => 'required',
         ]);
@@ -40,6 +49,9 @@ class AreaController extends Controller
 
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_area')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'lib' => 'required',
         ]);
@@ -51,6 +63,9 @@ class AreaController extends Controller
 
     public function delete($id)
     {
+        if (!auth()->user()->hasPermissionTo('delete_area')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         Area::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }

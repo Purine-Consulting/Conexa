@@ -20,9 +20,9 @@ class GradeController extends Controller
      * Return one 
      * 
      * @param $id Identifiant du grade
-     * @return User
+     * @return Grade
      */
-    public function showOneUser($id)
+    public function showOne($id)
     {
         return response()->json(Grade::find($id));
     }

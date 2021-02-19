@@ -14,6 +14,9 @@ class SkillController extends Controller
      */
     public function showAll()
     {
+        if (!auth()->user()->hasPermissionTo('see_skills')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Skill::all());
     }
 
@@ -26,11 +29,17 @@ class SkillController extends Controller
      */
     public function showOne($id)
     {
+        if (!auth()->user()->hasPermissionTo('see_skill')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         return response()->json(Skill::find($id));
     } 
 
     public function create(Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('add_skill')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'lib' => 'required',
         ]);
@@ -41,6 +50,9 @@ class SkillController extends Controller
     
     public function update($id, Request $request)
     {
+        if (!auth()->user()->hasPermissionTo('update_skill')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         $this->validate($request, [
             'lib' => 'required',
         ]);
@@ -52,6 +64,9 @@ class SkillController extends Controller
 
     public function delete($id)
     {
+        if (!auth()->user()->hasPermissionTo('delete_skill')) {
+            return response()->json(['Message' => "Action non-autorisée"], 401);
+        }
         Skill::findOrFail($id)->delete();
         return response('Supprimé avec succès!', 200);
     }
