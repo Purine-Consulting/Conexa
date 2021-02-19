@@ -66,6 +66,10 @@ class AuthController extends Controller
                     $mentee->save();
                     $user->assignRole('mentee');
                     break;
+                
+                case 'admin':
+                    $user->assignRole('admin');
+                    break;
 
                 default:
                     # code...
