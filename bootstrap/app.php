@@ -64,6 +64,7 @@ $app->configure('app');
 //Ajout de la configuration pour JWTAuth
 $app->configure('jwt');
 $app->configure('auth');
+$app->configure('permission');
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +82,9 @@ $app->configure('auth');
 // ]);
 
 $app->routeMiddleware([
-    'auth' => App\Http\Middleware\Authenticate::class,
+    'auth'          => App\Http\Middleware\Authenticate::class,
+    'permission'    => Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    'role'          => Spatie\Permission\Middlewares\RoleMiddleware::class,
 ]);
 
 /*
@@ -101,6 +104,12 @@ $app->register(App\Providers\AuthServiceProvider::class);
 
 // Ajout du provider JWTAuth
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+
+// Ajout du provider Spatie\Laraval-permission
+$app->register(Spatie\Permission\PermissionServiceProvider::class);
+
+// Activation du cache
+$app->alias('cache', \Illuminate\Cache\CacheManager::class);
 
 /*
 |--------------------------------------------------------------------------
