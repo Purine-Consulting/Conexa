@@ -57,12 +57,14 @@ class AuthController extends Controller
                     $mentor = new Mentor;
                     $mentor->id = $applicant->id;
                     $mentor->save();
+                    $user->assignRole('mentor');
                     break;
                 
                 case 'mentee':
                     $mentee = new Mentee;
                     $mentee->id = $applicant->id;
                     $mentee->save();
+                    $user->assignRole('mentee');
                     break;
 
                 default:
@@ -111,7 +113,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Déconnecté avec succès!']);
     }
 
     /**
