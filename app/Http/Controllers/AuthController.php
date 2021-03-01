@@ -64,6 +64,8 @@ class AuthController extends Controller
                 case 'mentee':
                     $mentee = new Mentee;
                     $mentee->id = $applicant->id;
+                    $mentee->motivation = $request->input('motivation');
+                    $mentee->school = $request->input('school');
                     $mentee->save();
                     $user->assignRole('mentee');
                     break;
