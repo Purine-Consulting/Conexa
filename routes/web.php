@@ -11,9 +11,9 @@
 |
 */
 
-// $router->get('/', function () use ($router) {
-//     return $router->app->version();
-// });
+$router->get('/', function () use ($router) {
+    return view('website.index');
+});
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     // Authentication management
